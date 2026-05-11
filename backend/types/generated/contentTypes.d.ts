@@ -440,6 +440,103 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEjemploTraduccionEjemploTraduccion
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'ejemplo_traduccions';
+  info: {
+    displayName: 'EjemploTraduccion';
+    pluralName: 'ejemplo-traduccions';
+    singularName: 'ejemplo-traduccion';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    explicacion: Schema.Attribute.Blocks;
+    idiomaDestino: Schema.Attribute.String;
+    idiomaOrigen: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ejemplo-traduccion.ejemplo-traduccion'
+    > &
+      Schema.Attribute.Private;
+    nivelDificultad: Schema.Attribute.Enumeration<
+      ['Basico', 'Intermedio', 'Avanzado']
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    textoOriginal: Schema.Attribute.Blocks;
+    titulo: Schema.Attribute.String & Schema.Attribute.Required;
+    traduccionEsperada: Schema.Attribute.Blocks;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiIdiomaIdioma extends Struct.CollectionTypeSchema {
+  collectionName: 'idiomas';
+  info: {
+    displayName: 'Idioma';
+    pluralName: 'idiomas';
+    singularName: 'idioma';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    codigo: Schema.Attribute.String & Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descripcion: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::idioma.idioma'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPaginaPagina extends Struct.CollectionTypeSchema {
+  collectionName: 'paginas';
+  info: {
+    displayName: 'Pagina ';
+    pluralName: 'paginas';
+    singularName: 'pagina';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contenido: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::pagina.pagina'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String & Schema.Attribute.Unique;
+    titulo: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -951,6 +1048,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::ejemplo-traduccion.ejemplo-traduccion': ApiEjemploTraduccionEjemploTraduccion;
+      'api::idioma.idioma': ApiIdiomaIdioma;
+      'api::pagina.pagina': ApiPaginaPagina;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

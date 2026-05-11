@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "idiomas",
+  "info": {
+    "singularName": "idioma",
+    "pluralName": "idiomas",
+    "displayName": "Idioma"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "codigo": {
+      "type": "string",
+      "unique": true
+    },
+    "descripcion": {
+      "type": "string"
+    }
+  }
+}
